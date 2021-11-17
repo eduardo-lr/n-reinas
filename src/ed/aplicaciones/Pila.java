@@ -38,12 +38,17 @@ public class Pila<T> implements Iterable<T> {
             siguiente = cabeza;
         }
 
-        /** Nos dice si hay un elemento siguiente. */
+        /** Nos dice si hay un elemento siguiente. 
+		 * @return <code>true</code> si hay un elemento siguiente,
+     	 *         <code>false</code> en otro caso.
+     	 */
         @Override public boolean hasNext() {
 			return siguiente != null;
         }
 
-        /** Nos da el elemento siguiente. */
+        /** Nos da el elemento siguiente. 
+		 * @return el elemento siguiente.
+		 */
         @Override public T next() {
 			if (!hasNext()) 
 				throw new NoSuchElementException();
