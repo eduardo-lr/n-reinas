@@ -1,14 +1,15 @@
 package ed.aplicaciones;
 
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 
 /**
  * Clase para pilas de tipo genérico.
  */
-public class Pila<T> {
+public class Pila<T> implements Iterable<T> {
 
     /**
-     * Clase interna para nodos.
+     * Clase interna privada para nodos.
      */
     private class Nodo {
         /** El elemento del nodo. */
@@ -25,10 +26,35 @@ public class Pila<T> {
         }
     }
 
+	/* 
+	 * Clase interna privada para iteradores. 
+	 */
+    private class Iterador implements Iterator<T> {
+        /** El nodo siguiente. */
+        public Nodo siguiente;
+
+        /** Construye un nuevo iterador. */
+        public Iterador() {
+            siguiente = cabeza;
+        }
+
+        /** Nos dice si hay un elemento siguiente. */
+        @Override public boolean hasNext() {
+			return siguiente != null;
+        }
+
+        /** Nos da el elemento siguiente. */
+        @Override public T next() {
+			if (!hasNext()) 
+				throw new NoSuchElementException();
+			T elemento = siguiente.elemento;
+			siguiente = siguiente.siguiente;
+			return elemento;
+        }
+    }
+
     /** La cabeza de la pila. */
     private Nodo cabeza;
-    /** El rabo de la pila. */
-    private Nodo rabo;
 	/** La longitud de la pila. */
 	private int longitud;
 
@@ -43,7 +69,7 @@ public class Pila<T> {
 			throw new IllegalArgumentException();
 		Nodo n = new Nodo(elemento);
 		if (cabeza == null) 
-			cabeza = rabo = n;
+			cabeza = n;
 		else {
 			n.siguiente = cabeza;
 			cabeza = n;
@@ -61,8 +87,6 @@ public class Pila<T> {
 			throw new NoSuchElementException();
 		T t = cabeza.elemento;
 		cabeza = cabeza.siguiente;
-		if (cabeza == null) 
-			rabo = null;
 		longitud--;
 		return t;
     }
@@ -95,5 +119,13 @@ public class Pila<T> {
 	public int getLongitud() {
 		return longitud;
 	}
+
+	/**
+     * Regresa un iterador para recorrer la pila.
+     * @return un iterador para recorrer la pila.
+     */
+    @Override public Iterator<T> iterator() {
+        return new Iterador();
+    }
 
 }
