@@ -27,18 +27,6 @@ public class Reina {
 		columna++;
 	}
 
-	public boolean esComida(Pila<Reina> pila) {
-		for (Reina reina : pila) {
-			if (this.equals(reina))
-				continue;
-			if (reina.columna == columna || reina.renglon == renglon)
-				return true;
-			if (this.estaEnSuDiagonal(reina))
-				return true;
-		}
-		return false;
-	}
-
 	@Override public boolean equals(Object object) {
 		if (object == null || object.getClass() != this.getClass()) 
             return false;
@@ -50,17 +38,5 @@ public class Reina {
 
 	@Override public String toString() {
 		return String.format("Renglón %d, columna %c \n", renglon, columna);
-	}
-
-	private boolean estaEnSuDiagonal(Reina reina) {
-		return estaEnSuDiagonalDerecha(reina) || estaEnSuDiagonalIzquierda(reina);
-	}
-
-	private boolean estaEnSuDiagonalDerecha(Reina reina) {
-		return false;
-	}
-
-	private boolean estaEnSuDiagonalIzquierda(Reina reina) {
-		return false;
 	}
 }
