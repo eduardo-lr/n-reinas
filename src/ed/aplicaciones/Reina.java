@@ -19,12 +19,17 @@ public class Reina {
 		return columna;
 	}
 
-	public void mueveRenglon() {
-		renglon++;
-	}
-
-	public void mueveColumna() {
-		columna++;
+	public void mueve(Direccion direccion) {
+		switch(direccion) {
+			case DERECHA:
+				columna++;
+			case IZQUIERDA:
+				columna--;
+			case ARRIBA:
+				renglon++;
+			case ABAJO:
+				renglon--;
+		}
 	}
 
 	@Override public boolean equals(Object object) {

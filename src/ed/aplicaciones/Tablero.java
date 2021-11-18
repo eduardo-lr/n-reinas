@@ -19,11 +19,11 @@ public class Tablero {
 					reinas.saca();
 				}
 				if (!reinas.esVacia())
-					reinas.mira().mueveColumna();
+					reinas.mira().mueve(Direccion.DERECHA);
 			} else if (reinas.getLongitud() == n) 
 				return reinas;
 			else
-				reinas.mira().mueveRenglon();
+				reinas.mira().mueve(Direccion.ARRIBA);
 		}
 		if (reinas.esVacia())
 			throw new SinSolucion("No hay solucion");
