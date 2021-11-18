@@ -8,9 +8,9 @@ public class Tablero {
 		
 		public int columna;
 
-		public Posicion(int renglon, int columna) {
+		public Posicion(int renglon) {
 			this.renglon = renglon;
-			this.columna = columna;
+			this.columna = 1;
 		}
 
 		@Override public boolean equals(Object object) {
@@ -44,6 +44,10 @@ public class Tablero {
 			}
 		}
 
+		public void muevePrimeraColumna() {
+			posicion.columna = 1;
+		}
+
 		@Override public boolean equals(Object object) {
 			if (object == null || object.getClass() != this.getClass()) 
     	        return false;
@@ -54,7 +58,7 @@ public class Tablero {
 		}
 	
 		@Override public String toString() {
-			return String.format("Renglón %d, columna %c \n", 
+			return String.format("Renglón %d, columna %c", 
 									posicion.renglon, (char) (posicion.columna + 96));
 		}
 	}
@@ -80,24 +84,26 @@ public class Tablero {
 		}
 	}
 
-	private Pila resuelve() throws SinSolucion {
+	private void resuelve() throws SinSolucion {
+		reinas.mete(new Reina(new Posicion(1)));
 		while (!reinas.esVacia()) {
-			Reina ultimaAgregada = reinas.mira();
-			if (esComida(ultimaAgregada)) {
+			if (esComida(reinas.mira())) {
 				while (!reinas.esVacia() && reinas.mira().posicion.columna == n) {
 					reinas.saca();
 				}
 				if (!reinas.esVacia())
 					reinas.mira().mueve(Direccion.DERECHA);
 			} else if (reinas.getLongitud() == n) 
-				return reinas;
-			else
-				reinas.mira().mueve(Direccion.ARRIBA);
+				return;
+			else {
+				int renglon = reinas.mira().posicion.renglon;
+				reinas.mete(new Reina(new Posicion(renglon+1)));
+			}
 		}
 		if (reinas.esVacia())
 			throw new SinSolucion("No hay solucion");
 		else
-			return reinas; 
+			return; 
 	}
 
 	private boolean esComida(Reina ultimaAgregada) {
