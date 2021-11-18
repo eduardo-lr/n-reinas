@@ -4,9 +4,9 @@ public class Reina {
 
 	private int renglon;
 
-	private int columna;
+	private char columna;
 
-	public Reina(int renglon, int columna) {
+	public Reina(int renglon, char columna) {
 		this.renglon = renglon;
 		this.columna = columna;
 	}
@@ -15,7 +15,7 @@ public class Reina {
 		return renglon;
 	}
 
-	public int getColumna() {
+	public char getColumna() {
 		return columna;
 	}
 
@@ -33,5 +33,9 @@ public class Reina {
 
 	@Override public boolean equals(Object object) {
 		return false;
+	}
+
+	@Override public String toString() {
+		return String.format("Renglón %d, columna %c \n", renglon, columna);
 	}
 }
