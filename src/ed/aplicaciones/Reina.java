@@ -33,7 +33,7 @@ public class Reina {
 				continue;
 			if (reina.columna == columna || reina.renglon == renglon)
 				return true;
-			if (this.comparteDiagonal(reina))
+			if (this.estaEnSuDiagonal(reina))
 				return true;
 		}
 		return false;
@@ -52,7 +52,15 @@ public class Reina {
 		return String.format("Renglón %d, columna %c \n", renglon, columna);
 	}
 
-	private boolean comparteDiagonal(Reina reina) {
+	private boolean estaEnSuDiagonal(Reina reina) {
+		return estaEnSuDiagonalDerecha(reina) || estaEnSuDiagonalIzquierda(reina);
+	}
+
+	private boolean estaEnSuDiagonalDerecha(Reina reina) {
+		return false;
+	}
+
+	private boolean estaEnSuDiagonalIzquierda(Reina reina) {
 		return false;
 	}
 }
