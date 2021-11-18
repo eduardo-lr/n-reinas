@@ -49,8 +49,7 @@ public class Tablero {
 		for (Reina reina : reinas) {
 			if (ultimaAgregada.equals(reina))
 				continue;
-			if (ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna() || 
-					ultimaAgregada.getPosicion().getRenglon() == reina.getPosicion().getRenglon())
+			if (ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna())
 				return true;
 			if (estanEnDiagonal(ultimaAgregada, reina))
 				return true;
