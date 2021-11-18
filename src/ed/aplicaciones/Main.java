@@ -6,7 +6,7 @@ public class Main {
 
     }
 
-	private static Pila ResuelveNReinas(int n) throws Exception {
+	private static Pila ResuelveNReinas(int n) throws SinSolucion {
 		Pila<Reina> pila = new Pila<>();
 		while (!pila.esVacia()) {
 			Reina ultimaAgregada = pila.mira();
@@ -23,7 +23,7 @@ public class Main {
 		}
 		
 		if (pila.esVacia())
-			throw new Exception();
+			throw new SinSolucion("No hay solucion");
 		else
 			return pila; 
 	}
