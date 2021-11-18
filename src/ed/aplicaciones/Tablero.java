@@ -37,7 +37,17 @@ public class Tablero {
 		this.reinas = new Pila<Reina>();
 	}
 
-	public void resuelveNReinas() throws SinSolucionEncontrada {
+	public String resuelveNReinas() {
+		String s = String.format("Tablero %dx%d \n", n, n); 
+		if (haySolucion()) {
+			for (Reina reina : reinas) 
+				s += reina.toString() + "\n";
+		} else 
+			s += "No hay solución \n";
+		return s;
+	}
+
+	private boolean haySolucion() {
 		reinas.mete(new Reina(1));
 		while (!reinas.esVacia()) {
 			if (esComida(reinas.mira())) {
@@ -46,18 +56,14 @@ public class Tablero {
 				}
 				if (!reinas.esVacia()) 
 					reinas.mira().columna++;
-			} else if (reinas.getLongitud() == n) {
-				return;
-			} else {
+			} else if (reinas.getLongitud() == n) 
+				return true;
+			else {
 				int renglon = reinas.mira().renglon;
 				reinas.mete(new Reina(renglon+1));
 			}
 		}
-		if (reinas.esVacia())
-			throw new SinSolucionEncontrada("No hay solucion");
-		else {
-			return;
-		}
+		return !reinas.esVacia();
 	}
 
 	private boolean esComida(Reina ultimaAgregada) {
@@ -78,12 +84,5 @@ public class Tablero {
 			return ultimaAgregada.columna == reina.columna-pasos;
 		else 
 			return ultimaAgregada.columna == reina.columna+pasos;
-	}
-
-	@Override public String toString() {
-		String s = "";
-		for (Reina reina : reinas) 
-			s += reina.toString() + "\n";
-		return s;
 	}
 }
