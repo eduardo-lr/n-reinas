@@ -4,13 +4,29 @@ public class Tablero {
 
 	private class Posicion {
 
-		public int renglon;
+		private int renglon;
 		
-		public int columna;
+		private int columna;
 
 		public Posicion(int renglon) {
 			this.renglon = renglon;
 			this.columna = 1;
+		}
+
+		public int getRenglon() {
+			return renglon;
+		}
+
+		public int getColumna() {
+			return columna;
+		}
+
+		public void setRenglon(int renglon) {
+			this.renglon = renglon;
+		}
+
+		public void setColumna(int columna) {
+			this.columna = columna;
 		}
 
 		@Override public boolean equals(Object object) {
@@ -25,7 +41,7 @@ public class Tablero {
 
 	private class Reina {
 	
-		public Posicion posicion;
+		private Posicion posicion;
 
 		public Reina(Posicion posicion) {
 			this.posicion = posicion;
@@ -34,22 +50,26 @@ public class Tablero {
 		public void mueve(Direccion direccion) {
 			switch(direccion) {
 				case DERECHA:
-					posicion.columna++;
+					posicion.setColumna(posicion.getColumna()+1);
 					break;
 				case IZQUIERDA:
-					posicion.columna--;
+					posicion.setColumna(posicion.getColumna()-1);
 					break;
 				case ARRIBA:
-					posicion.renglon++;
+					posicion.setRenglon(posicion.getRenglon()+1);
 					break;
 				case ABAJO:
-					posicion.renglon--;
+					posicion.setRenglon(posicion.getRenglon()-1);
 					break;
 			}
 		}
 
-		public void muevePrimeraColumna() {
-			posicion.columna = 1;
+		public Posicion getPosicion() {
+			return posicion;
+		}
+
+		public void setPosicion(Posicion posicion) {
+			this.posicion = posicion;
 		}
 
 		@Override public boolean equals(Object object) {
@@ -63,7 +83,11 @@ public class Tablero {
 	
 		@Override public String toString() {
 			return String.format("Renglón %d, columna %c", 
-									posicion.renglon, (char) (posicion.columna + 96));
+									posicion.getRenglon(), IntToChar(posicion.getColumna()));
+		}
+
+		private char IntToChar(int entero) {
+			return (char) (entero + 96);
 		}
 	}
 	
@@ -74,15 +98,6 @@ public class Tablero {
 	public Tablero(int n) {
 		this.n = n;
 		this.reinas = new Pila<Reina>();
-	}
-
-	public void depuracion() {
-		reinas.mete(new Reina(new Posicion(1)));
-		reinas.mete(new Reina(new Posicion(5)));
-		reinas.mira().mueve(Direccion.DERECHA);
-		for (Reina reina : reinas) {
-			System.out.println(reina.toString());
-		}
 	}
 
 	public void resuelveNReinas() {
@@ -101,7 +116,7 @@ public class Tablero {
 		reinas.mete(new Reina(new Posicion(1)));
 		while (!reinas.esVacia()) {
 			if (esComida(reinas.mira())) {
-				while (!reinas.esVacia() && reinas.mira().posicion.columna == n) {
+				while (!reinas.esVacia() && reinas.mira().getPosicion().getColumna() == n) {
 					reinas.saca();
 				}
 				if (!reinas.esVacia()) 
@@ -109,7 +124,7 @@ public class Tablero {
 			} else if (reinas.getLongitud() == n) 
 				return;
 			else {
-				int renglon = reinas.mira().posicion.renglon;
+				int renglon = reinas.mira().getPosicion().getRenglon();
 				reinas.mete(new Reina(new Posicion(renglon+1)));
 			}
 		}
@@ -123,8 +138,8 @@ public class Tablero {
 		for (Reina reina : reinas) {
 			if (ultimaAgregada.equals(reina))
 				continue;
-			if (ultimaAgregada.posicion.columna == reina.posicion.columna || 
-					ultimaAgregada.posicion.renglon == reina.posicion.renglon)
+			if (ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna() || 
+					ultimaAgregada.getPosicion().getRenglon() == reina.getPosicion().getRenglon())
 				return true;
 			if (estanEnDiagonal(ultimaAgregada, reina))
 				return true;
@@ -138,12 +153,12 @@ public class Tablero {
 	}
 
 	private boolean seCruzan(Reina ultimaAgregada, Reina reina, Direccion direccion) {
-		Posicion posicion = reina.posicion;
+		Posicion posicion = reina.getPosicion();
 		boolean seCruzaron = false;
 		while (reina.posicion.renglon < n) {
-			if (direccion == Direccion.IZQUIERDA && reina.posicion.columna <= 1)
+			if (direccion == Direccion.IZQUIERDA && reina.getPosicion().getColumna() <= 1)
 				break;
-			else if (direccion == Direccion.DERECHA && reina.posicion.columna >= n)
+			else if (direccion == Direccion.DERECHA && reina.getPosicion().getColumna() >= n)
 				break;
 			reina.mueve(direccion);
 			reina.mueve(Direccion.ARRIBA);
@@ -152,7 +167,7 @@ public class Tablero {
 				break;
 			}
 		}
-		reina.posicion = posicion;
+		reina.setPosicion(posicion);
 		return seCruzaron;
 	}
 }
