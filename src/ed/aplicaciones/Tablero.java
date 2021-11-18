@@ -59,28 +59,7 @@ public class Tablero {
 	}
 
 	private boolean estanEnDiagonal(Reina ultimaAgregada, Reina reina) {
-		return (seCruzan(ultimaAgregada, reina, Direccion.DERECHA) || 
-					seCruzan(ultimaAgregada, reina, Direccion.IZQUIERDA));
-	}
-
-	private boolean seCruzan(Reina ultimaAgregada, Reina reina, Direccion direccion) {
-		Posicion posicion = reina.getPosicion();
-		boolean seCruzaron = false;
-		while (reina.getPosicion().getRenglon() < ultimaAgregada.getPosicion().getRenglon()) {
-			if (direccion == Direccion.IZQUIERDA && 
-					reina.getPosicion().getColumna() <= ultimaAgregada.getPosicion().getColumna())
-				break;
-			else if (direccion == Direccion.DERECHA && 
-					reina.getPosicion().getColumna() >= ultimaAgregada.getPosicion().getColumna())
-				break;
-			reina.mueve(direccion);
-			reina.mueve(Direccion.ARRIBA);
-			if (ultimaAgregada.equals(reina)) {
-				seCruzaron = true;
-				break;
-			}
-		}
-		reina.setPosicion(posicion);
-		return seCruzaron;
+		int pasos = ultimaAgregada.getPosicion().getRenglon() - reina.getPosicion().getRenglon();
+		return ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna()+pasos;
 	}
 }
