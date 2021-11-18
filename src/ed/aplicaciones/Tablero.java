@@ -1,6 +1,32 @@
 package ed.aplicaciones;
 
 public class Tablero {
+
+	private class Reina {
+
+		public int renglon;
+		
+		public int columna;
+
+		public Reina(int renglon) {
+			this.renglon = renglon;
+			this.columna = 1;
+		}
+
+		@Override public boolean equals(Object object) {
+			if (object == null || object.getClass() != this.getClass()) 
+   	    	    return false;
+		
+			Reina reina = (Reina) object;
+		
+			return renglon == reina.renglon && columna == reina.columna;
+		}
+	
+		@Override public String toString() {
+			return String.format("Renglón %d, columna %c", 
+								renglon, (char) (columna + 96));
+		}
+	}
 	
 	private int n;
 
@@ -15,15 +41,15 @@ public class Tablero {
 		reinas.mete(new Reina(1));
 		while (!reinas.esVacia()) {
 			if (esComida(reinas.mira())) {
-				while (!reinas.esVacia() && reinas.mira().getColumna() == n) {
+				while (!reinas.esVacia() && reinas.mira().columna == n) {
 					reinas.saca();
 				}
 				if (!reinas.esVacia()) 
-					reinas.mira().mueve();
+					reinas.mira().columna++;
 			} else if (reinas.getLongitud() == n) {
 				return;
 			} else {
-				int renglon = reinas.mira().getRenglon();
+				int renglon = reinas.mira().renglon;
 				reinas.mete(new Reina(renglon+1));
 			}
 		}
@@ -38,7 +64,7 @@ public class Tablero {
 		for (Reina reina : reinas) {
 			if (ultimaAgregada.equals(reina))
 				continue;
-			if (ultimaAgregada.getColumna() == reina.getColumna())
+			if (ultimaAgregada.columna == reina.columna)
 				return true;
 			if (estanEnDiagonal(ultimaAgregada, reina))
 				return true;
@@ -47,11 +73,11 @@ public class Tablero {
 	}
 
 	private boolean estanEnDiagonal(Reina ultimaAgregada, Reina reina) {
-		int pasos = ultimaAgregada.getRenglon() - reina.getRenglon();
-		if (ultimaAgregada.getColumna() < reina.getColumna())
-			return ultimaAgregada.getColumna() == reina.getColumna()-pasos;
+		int pasos = ultimaAgregada.renglon - reina.renglon;
+		if (ultimaAgregada.columna < reina.columna)
+			return ultimaAgregada.columna == reina.columna-pasos;
 		else 
-			return ultimaAgregada.getColumna() == reina.getColumna()+pasos;
+			return ultimaAgregada.columna == reina.columna+pasos;
 	}
 
 	@Override public String toString() {
