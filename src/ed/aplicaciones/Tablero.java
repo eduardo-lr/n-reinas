@@ -60,6 +60,9 @@ public class Tablero {
 
 	private boolean estanEnDiagonal(Reina ultimaAgregada, Reina reina) {
 		int pasos = ultimaAgregada.getPosicion().getRenglon() - reina.getPosicion().getRenglon();
-		return ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna()+pasos;
+		if (ultimaAgregada.getPosicion().getColumna() < reina.getPosicion().getColumna())
+			return ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna()-pasos;
+		else 
+			return ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna()+pasos;
 	}
 }
