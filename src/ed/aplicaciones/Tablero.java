@@ -35,7 +35,6 @@ public class Tablero {
 			switch(direccion) {
 				case DERECHA:
 					posicion.columna++;
-					System.out.println(posicion.columna);
 				case IZQUIERDA:
 					posicion.columna--;
 				case ARRIBA:
@@ -91,7 +90,6 @@ public class Tablero {
 			if (esComida(reinas.mira())) {
 				while (!reinas.esVacia() && reinas.mira().posicion.columna == n) {
 					return;
-					//reinas.saca();
 				}
 				if (!reinas.esVacia()) 
 					reinas.mira().mueve(Direccion.DERECHA);
