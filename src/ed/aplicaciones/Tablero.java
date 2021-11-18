@@ -31,7 +31,7 @@ public class Tablero {
 					reinas.saca();
 				}
 				if (!reinas.esVacia()) 
-					reinas.mira().mueve(Direccion.DERECHA);
+					reinas.mira().mueve();
 			} else if (reinas.getLongitud() == n) 
 				return;
 			else {

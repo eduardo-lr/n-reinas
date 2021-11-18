@@ -8,21 +8,8 @@ public class Reina {
 		this.posicion = posicion;
 	}
 
-	public void mueve(Direccion direccion) {
-		switch(direccion) {
-			case DERECHA:
-				posicion.setColumna(posicion.getColumna()+1);
-				break;
-			case IZQUIERDA:
-				posicion.setColumna(posicion.getColumna()-1);
-				break;
-			case ARRIBA:
-				posicion.setRenglon(posicion.getRenglon()+1);
-				break;
-			case ABAJO:
-				posicion.setRenglon(posicion.getRenglon()-1);
-				break;
-		}
+	public void mueve() {
+		posicion.setColumna(posicion.getColumna()+1);
 	}
 
 	public Posicion getPosicion() {
