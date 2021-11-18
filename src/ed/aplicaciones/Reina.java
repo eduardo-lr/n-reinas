@@ -28,6 +28,14 @@ public class Reina {
 	}
 
 	public boolean esComida(Pila<Reina> pila) {
+		for (Reina reina : pila) {
+			if (this.equals(reina))
+				continue;
+			if (reina.columna == columna || reina.renglon == renglon)
+				return true;
+			if (this.comparteDiagonal(reina))
+				return true;
+		}
 		return false;
 	}
 
@@ -42,5 +50,9 @@ public class Reina {
 
 	@Override public String toString() {
 		return String.format("Renglón %d, columna %c \n", renglon, columna);
+	}
+
+	private boolean comparteDiagonal(Reina reina) {
+		return false;
 	}
 }
