@@ -32,7 +32,12 @@ public class Reina {
 	}
 
 	@Override public boolean equals(Object object) {
-		return false;
+		if (object == null || object.getClass() != this.getClass()) 
+            return false;
+		
+		Reina reina = (Reina) object;
+
+		return renglon == reina.renglon && columna == reina.columna;
 	}
 
 	@Override public String toString() {
