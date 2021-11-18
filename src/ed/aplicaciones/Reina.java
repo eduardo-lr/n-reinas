@@ -31,7 +31,7 @@ public class Reina {
 		return false;
 	}
 
-	@override public boolean equals(Object object) {
+	@Override public boolean equals(Object object) {
 		return false;
 	}
 }
