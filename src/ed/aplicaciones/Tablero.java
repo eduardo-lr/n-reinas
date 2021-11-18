@@ -1,95 +1,6 @@
 package ed.aplicaciones;
 
 public class Tablero {
-
-	private class Posicion {
-
-		private int renglon;
-		
-		private int columna;
-
-		public Posicion(int renglon) {
-			this.renglon = renglon;
-			this.columna = 1;
-		}
-
-		public int getRenglon() {
-			return renglon;
-		}
-
-		public int getColumna() {
-			return columna;
-		}
-
-		public void setRenglon(int renglon) {
-			this.renglon = renglon;
-		}
-
-		public void setColumna(int columna) {
-			this.columna = columna;
-		}
-
-		@Override public boolean equals(Object object) {
-			if (object == null || object.getClass() != this.getClass()) 
-    	        return false;
-			
-			Posicion posicion = (Posicion) object;
-
-			return renglon == posicion.renglon && columna == posicion.columna;
-		}
-	}
-
-	private class Reina {
-	
-		private Posicion posicion;
-
-		public Reina(Posicion posicion) {
-			this.posicion = posicion;
-		}
-
-		public void mueve(Direccion direccion) {
-			switch(direccion) {
-				case DERECHA:
-					posicion.setColumna(posicion.getColumna()+1);
-					break;
-				case IZQUIERDA:
-					posicion.setColumna(posicion.getColumna()-1);
-					break;
-				case ARRIBA:
-					posicion.setRenglon(posicion.getRenglon()+1);
-					break;
-				case ABAJO:
-					posicion.setRenglon(posicion.getRenglon()-1);
-					break;
-			}
-		}
-
-		public Posicion getPosicion() {
-			return posicion;
-		}
-
-		public void setPosicion(Posicion posicion) {
-			this.posicion = posicion;
-		}
-
-		@Override public boolean equals(Object object) {
-			if (object == null || object.getClass() != this.getClass()) 
-    	        return false;
-			
-			Reina reina = (Reina) object;
-
-			return posicion.equals(reina.posicion);
-		}
-	
-		@Override public String toString() {
-			return String.format("Renglón %d, columna %c", 
-									posicion.getRenglon(), IntToChar(posicion.getColumna()));
-		}
-
-		private char IntToChar(int entero) {
-			return (char) (entero + 96);
-		}
-	}
 	
 	private int n;
 
@@ -155,7 +66,7 @@ public class Tablero {
 	private boolean seCruzan(Reina ultimaAgregada, Reina reina, Direccion direccion) {
 		Posicion posicion = reina.getPosicion();
 		boolean seCruzaron = false;
-		while (reina.posicion.renglon < n) {
+		while (reina.getPosicion().getRenglon() < n) {
 			if (direccion == Direccion.IZQUIERDA && reina.getPosicion().getColumna() <= 1)
 				break;
 			else if (direccion == Direccion.DERECHA && reina.getPosicion().getColumna() >= n)
