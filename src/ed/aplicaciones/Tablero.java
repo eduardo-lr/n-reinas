@@ -24,10 +24,10 @@ public class Tablero {
 	}
 
 	private void resuelve() throws SinSolucionEncontrada {
-		reinas.mete(new Reina(new Posicion(1)));
+		reinas.mete(new Reina(1));
 		while (!reinas.esVacia()) {
 			if (esComida(reinas.mira())) {
-				while (!reinas.esVacia() && reinas.mira().getPosicion().getColumna() == n) {
+				while (!reinas.esVacia() && reinas.mira().getColumna() == n) {
 					reinas.saca();
 				}
 				if (!reinas.esVacia()) 
@@ -35,8 +35,8 @@ public class Tablero {
 			} else if (reinas.getLongitud() == n) 
 				return;
 			else {
-				int renglon = reinas.mira().getPosicion().getRenglon();
-				reinas.mete(new Reina(new Posicion(renglon+1)));
+				int renglon = reinas.mira().getRenglon();
+				reinas.mete(new Reina(renglon+1));
 			}
 		}
 		if (reinas.esVacia())
@@ -49,7 +49,7 @@ public class Tablero {
 		for (Reina reina : reinas) {
 			if (ultimaAgregada.equals(reina))
 				continue;
-			if (ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna())
+			if (ultimaAgregada.getColumna() == reina.getColumna())
 				return true;
 			if (estanEnDiagonal(ultimaAgregada, reina))
 				return true;
@@ -58,10 +58,10 @@ public class Tablero {
 	}
 
 	private boolean estanEnDiagonal(Reina ultimaAgregada, Reina reina) {
-		int pasos = ultimaAgregada.getPosicion().getRenglon() - reina.getPosicion().getRenglon();
-		if (ultimaAgregada.getPosicion().getColumna() < reina.getPosicion().getColumna())
-			return ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna()-pasos;
+		int pasos = ultimaAgregada.getRenglon() - reina.getRenglon();
+		if (ultimaAgregada.getColumna() < reina.getColumna())
+			return ultimaAgregada.getColumna() == reina.getColumna()-pasos;
 		else 
-			return ultimaAgregada.getPosicion().getColumna() == reina.getPosicion().getColumna()+pasos;
+			return ultimaAgregada.getColumna() == reina.getColumna()+pasos;
 	}
 }

@@ -1,19 +1,26 @@
 package ed.aplicaciones;
 
 public class Reina {
-	
-	private Posicion posicion;
 
-	public Reina(Posicion posicion) {
-		this.posicion = posicion;
+	private int renglon;
+		
+	private int columna;
+
+	public Reina(int renglon) {
+		this.renglon = renglon;
+		this.columna = 1;
 	}
 
 	public void mueve() {
-		posicion.setColumna(posicion.getColumna()+1);
+		columna++;
 	}
 
-	public Posicion getPosicion() {
-		return posicion;
+	public int getRenglon() {
+		return renglon;
+	}
+
+	public int getColumna() {
+		return columna;
 	}
 
 	@Override public boolean equals(Object object) {
@@ -22,12 +29,12 @@ public class Reina {
 		
 		Reina reina = (Reina) object;
 		
-		return posicion.equals(reina.posicion);
+		return renglon == reina.renglon && columna == reina.columna;
 	}
 	
 	@Override public String toString() {
 		return String.format("Renglón %d, columna %c", 
-								posicion.getRenglon(), IntToChar(posicion.getColumna()));
+								renglon, IntToChar(columna));
 	}
 
 	private char IntToChar(int entero) {
