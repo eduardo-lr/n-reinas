@@ -66,10 +66,12 @@ public class Tablero {
 	private boolean seCruzan(Reina ultimaAgregada, Reina reina, Direccion direccion) {
 		Posicion posicion = reina.getPosicion();
 		boolean seCruzaron = false;
-		while (reina.getPosicion().getRenglon() < n) {
-			if (direccion == Direccion.IZQUIERDA && reina.getPosicion().getColumna() <= 1)
+		while (reina.getPosicion().getRenglon() < ultimaAgregada.getPosicion().getRenglon()) {
+			if (direccion == Direccion.IZQUIERDA && 
+					reina.getPosicion().getColumna() <= ultimaAgregada.getPosicion().getColumna())
 				break;
-			else if (direccion == Direccion.DERECHA && reina.getPosicion().getColumna() >= n)
+			else if (direccion == Direccion.DERECHA && 
+					reina.getPosicion().getColumna() >= ultimaAgregada.getPosicion().getColumna())
 				break;
 			reina.mueve(direccion);
 			reina.mueve(Direccion.ARRIBA);
