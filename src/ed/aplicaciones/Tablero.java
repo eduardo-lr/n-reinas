@@ -16,9 +16,7 @@ public class Tablero {
 		@Override public boolean equals(Object object) {
 			if (object == null || object.getClass() != this.getClass()) 
    	    	    return false;
-		
 			Reina reina = (Reina) object;
-		
 			return renglon == reina.renglon && columna == reina.columna;
 		}
 	
@@ -39,7 +37,7 @@ public class Tablero {
 
 	public String resuelveNReinas() {
 		String s = String.format("Tablero %dx%d \n", n, n); 
-		if (haySolucion()) {
+		if (resuelve()) {
 			for (Reina reina : reinas) 
 				s += reina.toString() + "\n";
 		} else 
@@ -47,7 +45,7 @@ public class Tablero {
 		return s;
 	}
 
-	private boolean haySolucion() {
+	private boolean resuelve() {
 		reinas.mete(new Reina(1));
 		while (!reinas.esVacia()) {
 			if (esComida(reinas.mira())) {
