@@ -19,10 +19,6 @@ public class Posicion {
 		return columna;
 	}
 
-	public void setRenglon(int renglon) {
-		this.renglon = renglon;
-	}
-
 	public void setColumna(int columna) {
 		this.columna = columna;
 	}

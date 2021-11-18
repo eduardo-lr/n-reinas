@@ -16,10 +16,6 @@ public class Reina {
 		return posicion;
 	}
 
-	public void setPosicion(Posicion posicion) {
-		this.posicion = posicion;
-	}
-
 	@Override public boolean equals(Object object) {
 		if (object == null || object.getClass() != this.getClass()) 
    	        return false;
