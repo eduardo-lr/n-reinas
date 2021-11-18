@@ -35,6 +35,7 @@ public class Tablero {
 			switch(direccion) {
 				case DERECHA:
 					posicion.columna++;
+					System.out.println(posicion.columna);
 				case IZQUIERDA:
 					posicion.columna--;
 				case ARRIBA:
@@ -78,20 +79,21 @@ public class Tablero {
 			for (Reina reina : reinas) {
 				System.out.println(reina.toString());
 			}
-		} catch (SinSolucion ss) {
+		} catch (SinSolucionEncontrada ss) {
 			System.out.println(ss.getMessage());
 			System.exit(1);
 		}
 	}
 
-	private void resuelve() throws SinSolucion {
+	private void resuelve() throws SinSolucionEncontrada {
 		reinas.mete(new Reina(new Posicion(1)));
 		while (!reinas.esVacia()) {
 			if (esComida(reinas.mira())) {
 				while (!reinas.esVacia() && reinas.mira().posicion.columna == n) {
-					reinas.saca();
+					return;
+					//reinas.saca();
 				}
-				if (!reinas.esVacia())
+				if (!reinas.esVacia()) 
 					reinas.mira().mueve(Direccion.DERECHA);
 			} else if (reinas.getLongitud() == n) 
 				return;
@@ -101,7 +103,7 @@ public class Tablero {
 			}
 		}
 		if (reinas.esVacia())
-			throw new SinSolucion("No hay solucion");
+			throw new SinSolucionEncontrada("No hay solucion");
 		else
 			return; 
 	}
