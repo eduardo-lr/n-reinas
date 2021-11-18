@@ -6,9 +6,9 @@ public class Tablero {
 
 		public int renglon;
 		
-		public char columna;
+		public int columna;
 
-		public Posicion(int renglon, char columna) {
+		public Posicion(int renglon, int columna) {
 			this.renglon = renglon;
 			this.columna = columna;
 		}
@@ -54,7 +54,8 @@ public class Tablero {
 		}
 	
 		@Override public String toString() {
-			return String.format("Renglón %d, columna %c \n", posicion.renglon, posicion.columna);
+			return String.format("Renglón %d, columna %c \n", 
+									posicion.renglon, (char) (posicion.columna + 96));
 		}
 	}
 	
@@ -87,7 +88,7 @@ public class Tablero {
 			return reinas; 
 	}
 
-	public boolean esComida(Reina ultimaAgregada) {
+	private boolean esComida(Reina ultimaAgregada) {
 		for (Reina reina : reinas) {
 			if (ultimaAgregada.equals(reina))
 				continue;
@@ -101,15 +102,26 @@ public class Tablero {
 	}
 
 	private boolean estanEnDiagonal(Reina ultimaAgregada, Reina reina) {
-		return (estanEnDiagonalDerecha(ultimaAgregada, reina) || 
-					estanEnDiagonalIzquierda(ultimaAgregada, reina));
+		return (seCruzan(ultimaAgregada, reina, Direccion.DERECHA) || 
+					seCruzan(ultimaAgregada, reina, Direccion.IZQUIERDA));
 	}
 
-	private boolean estanEnDiagonalDerecha(Reina ultimaAgregada, Reina reina) {
-		return false;
-	}
-
-	private boolean estanEnDiagonalIzquierda(Reina ultimaAgregada, Reina reina) {
-		return false;
+	private boolean seCruzan(Reina ultimaAgregada, Reina reina, Direccion direccion) {
+		Posicion posicion = reina.posicion;
+		boolean seCruzaron = false;
+		while (reina.posicion.renglon < n) {
+			if (direccion == Direccion.IZQUIERDA && reina.posicion.columna <= 1)
+				break;
+			else if (direccion == Direccion.DERECHA && reina.posicion.columna >= n)
+				break;
+			reina.mueve(direccion);
+			reina.mueve(Direccion.ARRIBA);
+			if (ultimaAgregada.equals(reina)) {
+				seCruzaron = true;
+				break;
+			}
+		}
+		reina.posicion = posicion;
+		return seCruzaron;
 	}
 }
