@@ -1,6 +1,62 @@
 package ed.aplicaciones;
 
 public class Tablero {
+
+	private class Posicion {
+
+		public int renglon;
+		
+		public char columna;
+
+		public Posicion(int renglon, char columna) {
+			this.renglon = renglon;
+			this.columna = columna;
+		}
+
+		@Override public boolean equals(Object object) {
+			if (object == null || object.getClass() != this.getClass()) 
+    	        return false;
+			
+			Posicion posicion = (Posicion) object;
+
+			return renglon == posicion.renglon && columna == posicion.columna;
+		}
+	}
+
+	private class Reina {
+	
+		public Posicion posicion;
+
+		public Reina(Posicion posicion) {
+			this.posicion = posicion;
+		}
+
+		public void mueve(Direccion direccion) {
+			switch(direccion) {
+				case DERECHA:
+					posicion.columna++;
+				case IZQUIERDA:
+					posicion.columna--;
+				case ARRIBA:
+					posicion.renglon++;
+				case ABAJO:
+					posicion.renglon--;
+			}
+		}
+
+		@Override public boolean equals(Object object) {
+			if (object == null || object.getClass() != this.getClass()) 
+    	        return false;
+			
+			Reina reina = (Reina) object;
+
+			return posicion.equals(reina.posicion);
+		}
+	
+		@Override public String toString() {
+			return String.format("Renglón %d, columna %c \n", posicion.renglon, posicion.columna);
+		}
+	}
 	
 	private int n;
 
@@ -15,7 +71,7 @@ public class Tablero {
 		while (!reinas.esVacia()) {
 			Reina ultimaAgregada = reinas.mira();
 			if (esComida(ultimaAgregada)) {
-				while (!reinas.esVacia() && reinas.mira().getColumna() == n) {
+				while (!reinas.esVacia() && reinas.mira().posicion.columna == n) {
 					reinas.saca();
 				}
 				if (!reinas.esVacia())
@@ -35,8 +91,8 @@ public class Tablero {
 		for (Reina reina : reinas) {
 			if (ultimaAgregada.equals(reina))
 				continue;
-			if (ultimaAgregada.getColumna() == reina.getColumna() || 
-					ultimaAgregada.getRenglon() == reina.getRenglon())
+			if (ultimaAgregada.posicion.columna == reina.posicion.columna || 
+					ultimaAgregada.posicion.renglon == reina.posicion.renglon)
 				return true;
 			if (estanEnDiagonal(ultimaAgregada, reina))
 				return true;
