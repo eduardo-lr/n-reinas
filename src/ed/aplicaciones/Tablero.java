@@ -35,12 +35,16 @@ public class Tablero {
 			switch(direccion) {
 				case DERECHA:
 					posicion.columna++;
+					break;
 				case IZQUIERDA:
 					posicion.columna--;
+					break;
 				case ARRIBA:
 					posicion.renglon++;
+					break;
 				case ABAJO:
 					posicion.renglon--;
+					break;
 			}
 		}
 
@@ -72,6 +76,15 @@ public class Tablero {
 		this.reinas = new Pila<Reina>();
 	}
 
+	public void depuracion() {
+		reinas.mete(new Reina(new Posicion(1)));
+		reinas.mete(new Reina(new Posicion(5)));
+		reinas.mira().mueve(Direccion.DERECHA);
+		for (Reina reina : reinas) {
+			System.out.println(reina.toString());
+		}
+	}
+
 	public void resuelveNReinas() {
 		try {
 			resuelve();
@@ -89,7 +102,7 @@ public class Tablero {
 		while (!reinas.esVacia()) {
 			if (esComida(reinas.mira())) {
 				while (!reinas.esVacia() && reinas.mira().posicion.columna == n) {
-					return;
+					reinas.saca();
 				}
 				if (!reinas.esVacia()) 
 					reinas.mira().mueve(Direccion.DERECHA);
