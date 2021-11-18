@@ -68,7 +68,19 @@ public class Tablero {
 		this.reinas = new Pila<Reina>();
 	}
 
-	public Pila ResuelveNReinas() throws SinSolucion {
+	public void resuelveNReinas() {
+		try {
+			resuelve();
+			for (Reina reina : reinas) {
+				System.out.println(reina.toString());
+			}
+		} catch (SinSolucion ss) {
+			System.out.println(ss.getMessage());
+			System.exit(1);
+		}
+	}
+
+	private Pila resuelve() throws SinSolucion {
 		while (!reinas.esVacia()) {
 			Reina ultimaAgregada = reinas.mira();
 			if (esComida(ultimaAgregada)) {
