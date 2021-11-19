@@ -119,7 +119,7 @@ public class Pila<T> implements Iterable<T> {
 
 	/**
 	 * Método para obtener la longitud de la pila
-	 * @return la longitud de la pila
+	 * @return la longitud de la pila.
 	 */
 	public int getLongitud() {
 		return longitud;
