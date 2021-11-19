@@ -81,7 +81,7 @@ public class Tablero {
 
 	/**
 	 * Éste método busca la solución al problema de las N
-	 * reinas usando <l>backtracking</l>. El algoritmo  
+	 * reinas usando <i>backtracking</i>. El algoritmo  
 	 * opera sobre la pila de reinas del tablero.
 	 * @return <code>true</code> si el problema tiene solución;
 	 *         <code>false</code> en otro caso.
