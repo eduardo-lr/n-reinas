@@ -8,47 +8,35 @@ import java.util.Iterator;
  */
 public class Pila<T> implements Iterable<T> {
 
-    /**
-     * Clase interna privada para nodos.
-     */
+    /* Clase interna privada para nodos. */
     private class Nodo {
-        /** El elemento del nodo. */
+        /* El elemento del nodo. */
         public T elemento;
-        /** El siguiente nodo. */
+        /* El siguiente nodo. */
         public Nodo siguiente;
 
-        /**
-         * Construye un nodo con un elemento.
-         * @param elemento el elemento del nodo.
-         */
+        /* Construye un nodo con un elemento. */
         public Nodo(T elemento) {
 			this.elemento = elemento;
         }
     }
 
-	/* 
-	 * Clase interna privada para iteradores. 
-	 */
+	/* Clase interna privada para iteradores. */
     private class Iterador implements Iterator<T> {
-        /** El nodo siguiente. */
+        /* El nodo siguiente. */
         public Nodo siguiente;
 
-        /** Construye un nuevo iterador. */
+        /* Construye un nuevo iterador. */
         public Iterador() {
             siguiente = cabeza;
         }
 
-        /** Nos dice si hay un elemento siguiente. 
-		 * @return <code>true</code> si hay un elemento siguiente,
-     	 *         <code>false</code> en otro caso.
-     	 */
+        /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
 			return siguiente != null;
         }
 
-        /** Nos da el elemento siguiente. 
-		 * @return el elemento siguiente.
-		 */
+        /** Nos da el elemento siguiente. */
         @Override public T next() {
 			if (!hasNext()) 
 				throw new NoSuchElementException();
@@ -58,9 +46,9 @@ public class Pila<T> implements Iterable<T> {
         }
     }
 
-    /** La cabeza de la pila. */
+    /* La cabeza de la pila. */
     private Nodo cabeza;
-	/** La longitud de la pila. */
+	/* La longitud de la pila. */
 	private int longitud;
 
     /**
