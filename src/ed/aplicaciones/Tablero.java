@@ -30,8 +30,9 @@ public class Tablero {
 	
 		/* Regresa una representacion en cadena de la reina. */
 		@Override public String toString() {
+			/* Si se acaban las minúsculas pasamos a las mayúsculas para las columnas. */
 			return String.format("Renglón %d, columna %c", 
-								renglon, (char) (columna + 96));
+								renglon, (char) (columna < 27 ? columna + 96 : columna + 38));
 		}
 	}
 	
