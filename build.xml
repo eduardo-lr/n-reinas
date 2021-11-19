@@ -34,4 +34,12 @@
 
     <target name="main" depends="clean,run"/>
 
+	<target name="generate-javadoc">
+   		<javadoc packagenames="ed.aplicaciones.*" sourcepath="${src.dir}"
+      		destdir="doc" version="true" windowtitle="Aplicación de Pilas: Backtracking">
+      		<doctitle><![CDATA[= N reinas =]]></doctitle>
+   		</javadoc>
+   		<echo message="java doc has been generated!" />
+	</target>
+
 </project>
