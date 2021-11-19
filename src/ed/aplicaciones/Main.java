@@ -6,7 +6,13 @@ package ed.aplicaciones;
 public class Main {
 
     public static void main(String[] args) {
-		Tablero tablero = new Tablero(8);
-		System.out.printf(tablero.resuelveNReinas());
+
+		/* Algunos casos de prueba. */
+		int[] casos = {1,2,3,5,8,23};
+
+		for (int i : casos) {
+			Tablero tablero = new Tablero(i);
+			System.out.println(tablero.resuelveNReinas());
+		}
     }
 }
