@@ -1,8 +1,8 @@
 # Proyecto Aplicación de Pilas: <i>Backtracking</i>
 
-Este proyecto resuelve el problema de las n-reinas (dado un tablero de ajedrez de n × n casillas, se desea colocar n reinas sin que se coman las unas a las otras) usando el algoritmo de <i>backtracking</i>.
+Este proyecto resuelve el <a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle">problema de las n-reinas</a> (dado un tablero de ajedrez de n × n casillas, se desea colocar n reinas sin que se coman las unas a las otras) usando el algoritmo de <a href="https://en.wikipedia.org/wiki/Backtracking"><i>backtracking</i></a>.
 
-Para ejecutar el programa hay dos alternativas. Si se ejecuta
+El programa está escrito en <a href="https://www.java.com/es/">Java</a> y se compila usando <a href="https://ant.apache.org/">Apache Ant</a>. Para ejecutarlo hay dos alternativas. Si se corre la instrucción
 ```sh
 ant run
 ```
