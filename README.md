@@ -42,4 +42,7 @@ Por otro lado, el programa también acepta valores dados por el usuario. Si se d
 ant run -Darg=N
 ```
 
-Si el argumento proporcionado no es un número entero positivo, el programa muestra un mensaje de error y termina su ejecución.
+Si el argumento proporcionado no es un número entero positivo, el programa muestra un mensaje de error y termina su ejecución. Para obtener la documentación del proyecto:
+```sh
+ant generate-javadoc
+```
