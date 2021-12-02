@@ -17,7 +17,7 @@ public class Pila<T> implements Iterable<T> {
 
         /* Construye un nodo con un elemento. */
         public Nodo(T elemento) {
-			this.elemento = elemento;
+		this.elemento = elemento;
         }
     }
 
@@ -28,28 +28,28 @@ public class Pila<T> implements Iterable<T> {
 
         /* Construye un nuevo iterador. */
         public Iterador() {
-            siguiente = cabeza;
+        	siguiente = cabeza;
         }
 
         /* Nos dice si hay un elemento siguiente. */
         @Override public boolean hasNext() {
-			return siguiente != null;
+		return siguiente != null;
         }
 
         /** Nos da el elemento siguiente. */
         @Override public T next() {
-			if (!hasNext()) 
-				throw new NoSuchElementException();
-			T elemento = siguiente.elemento;
-			siguiente = siguiente.siguiente;
-			return elemento;
+		if (!hasNext()) 
+			throw new NoSuchElementException();
+		T elemento = siguiente.elemento;
+		siguiente = siguiente.siguiente;
+		return elemento;
         }
     }
 
     /* La cabeza de la pila. */
     private Nodo cabeza;
-	/* La longitud de la pila. */
-	private int longitud;
+    /* La longitud de la pila. */
+    private int longitud;
 
     /**
      * Agrega un elemento al tope de la pila.
@@ -58,16 +58,16 @@ public class Pila<T> implements Iterable<T> {
      *         <code>null</code>.
      */
     public void mete(T elemento) {
-		if (elemento == null) 
-			throw new IllegalArgumentException();
-		Nodo n = new Nodo(elemento);
-		if (cabeza == null) 
-			cabeza = n;
-		else {
-			n.siguiente = cabeza;
-			cabeza = n;
-		}
-		longitud++;
+	if (elemento == null) 
+		throw new IllegalArgumentException();
+	Nodo n = new Nodo(elemento);
+	if (cabeza == null) 
+		cabeza = n;
+	else {
+		n.siguiente = cabeza;
+		cabeza = n;
+	}
+	longitud++;
     }
 
     /**
@@ -76,12 +76,12 @@ public class Pila<T> implements Iterable<T> {
      * @throws NoSuchElementException si la pila está vacía.
      */
     public T saca() {
-		if (esVacia()) 
-			throw new NoSuchElementException();
-		T t = cabeza.elemento;
-		cabeza = cabeza.siguiente;
-		longitud--;
-		return t;
+	if (esVacia()) 
+		throw new NoSuchElementException();
+	T t = cabeza.elemento;
+	cabeza = cabeza.siguiente;
+	longitud--;
+	return t;
     }
 
     /**
@@ -91,9 +91,9 @@ public class Pila<T> implements Iterable<T> {
      * @throws NoSuchElementException si la pila está vacía.
      */
     public T mira() {
-		if (esVacia()) 
-			throw new NoSuchElementException();
-		return cabeza.elemento;
+	if (esVacia()) 
+		throw new NoSuchElementException();
+	return cabeza.elemento;
     }
 
     /**
@@ -102,23 +102,22 @@ public class Pila<T> implements Iterable<T> {
      *         <code>false</code> en otro caso.
      */
     public boolean esVacia() {
-		return cabeza == null;
+	return cabeza == null;
     }
 
-	/**
-	 * Método para obtener la longitud de la pila
-	 * @return la longitud de la pila.
-	 */
-	public int getLongitud() {
-		return longitud;
-	}
+    /**
+     * Método para obtener la longitud de la pila
+     * @return la longitud de la pila.
+     */
+    public int getLongitud() {
+        return longitud;
+    }
 
-	/**
+    /**
      * Regresa un iterador para recorrer la pila.
      * @return un iterador para recorrer la pila.
      */
     @Override public Iterator<T> iterator() {
         return new Iterador();
     }
-
 }
