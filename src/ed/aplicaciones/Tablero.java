@@ -23,7 +23,7 @@ public class Tablero {
 		/* Nos dice si la reina es igual al objeto recibido. */
 		@Override public boolean equals(Object object) {
 			if (object == null || object.getClass() != this.getClass()) 
-   	    	    return false;
+				return false;
 			Reina reina = (Reina) object;
 			return renglon == reina.renglon && columna == reina.columna;
 		}
